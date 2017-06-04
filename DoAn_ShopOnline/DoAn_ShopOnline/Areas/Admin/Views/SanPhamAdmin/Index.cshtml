@@ -1,0 +1,87 @@
+﻿@model PagedList.IPagedList<ShopOnlineConnection.SanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_MainLayoutAdmin.cshtml";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 70%;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #5d5e63;
+    }
+
+    th {
+        background-color: #2a9fd6;
+        color: white;
+    }
+</style>
+<h2>Quản Lý Sản Phẩm</h2>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<table>
+    <tr>
+        <th>Mã Sản Phẩm</th>
+        <th>Tên Sản Phâm</th>
+        <th>Hình Ảnh</th>
+        <th>Tình Trạng</th>
+        <th>Quản lý ảnh</th>
+        <th colspan="2">
+            <a href="@Url.Action("Create","SanPhamAdmin")" style="text-decoration: none "><img src="~/Asset/images/AddNSX.png" /><span style="color:green;">Thêm mới</span> </a>
+        </th>
+        
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td > @item.MaSanPham</td>
+            <td>@item.TenSanPham</td>
+            
+            <td >@Html.Partial("_AvartaImg", DoAn_ShopOnline.Models.BUS.ShopOnlineBUS.LoadAvartaImg(@item.MaSanPham))</td>
+            <td>@item.TinhTrang</td>
+
+            <td><a href="#" data-id="@item.MaSanPham" class="btn-images"><img src="~/Asset/images/ThemHinh.png" style="background:white;" /></a></td>
+
+            <td><a href="@Url.Action("Edit","SanPhamAdmin",new { id = @item.MaSanPham})"> <img src="~/Asset/images/edit.png" /></a> </td>
+            <td><a href="@Url.Action("Delete","SanPhamAdmin",new { id = @item.MaSanPham})"> <img src="~/Asset/images/Delete.png" /></a> </td>
+        </tr>
+    }
+   
+</table>
+<!-- Modal -->
+<div class="modal fade" id="imagesManange" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Quản Lý Ảnh</h4>
+            </div>
+            <div class="modal-body">
+                <div id="imageList">
+
+                </div>
+                <div class="clear"></div>
+                <input type="button" id="btnChooImages" class="btn btn-primary" value="Chọn ảnh" />
+                <input type="hidden" id="hidProductID" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btnSaveImages">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

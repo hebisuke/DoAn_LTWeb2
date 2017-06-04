@@ -1,0 +1,60 @@
+﻿@model ShopOnlineConnection.NhaSanXuat
+@{
+    ViewBag.Title = "XoaTamThoi";
+    Layout = "~/Areas/Admin/Views/Shared/_MainLayoutAdmin.cshtml";
+}
+
+<h2>XoaTamThoi</h2>
+<style>
+    input[type=text] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #2a9fd6;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+</style>
+<div style="margin:auto;">
+    @using (Html.BeginForm("XoaTamThoi", "NhaSanXuatAdmin", FormMethod.Post, new { @style = "width : 50%; margin: auto;" }))
+    {
+        <label for="fname">Mã Nhà Sản Xuất</label>
+        <input type="text" id="fname" name="MaNhaSanXuat" style="background-color:#5d5e63;" placeholder="Mã Nhà Sản Xuất.." required value="@Model.MaNhaSanXuat" readonly>
+
+        <label for="lname">Tên Nhà Sản Xuất</label>
+        <input type="text" id="lname" name="TenNhaSanXuat" style="background-color:#5d5e63;" placeholder="Tên Nhà Sản Xuất.." required value="@Model.TenNhaSanXuat"  readonly>
+
+        <label for="country">Tình Trạng</label>
+        <select id="country" style="width:20%;background-color:#5d5e63;" name="TinhTrang" required>
+            @if (Model.TinhTrang == "1")
+            {
+                <option value="1" selected>Đã Khóa</option>
+            }
+            else
+            {
+                <option value="0" selected>Chưa Khóa</option>
+            }
+        </select>
+
+        <input type="submit" value="Xác nhận xóa">
+    }
+
+
+</div>
+

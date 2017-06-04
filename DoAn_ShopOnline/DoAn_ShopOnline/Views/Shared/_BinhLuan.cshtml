@@ -1,0 +1,18 @@
+﻿@model PagedList.IPagedList<ShopOnlineConnection.BinhLuan>
+@using PagedList.Mvc;
+@{ 
+    Layout = null;
+}
+<div class="nav nav-tabs">
+    <strong>Bình luận</strong>
+</div>
+<div class="tab-content">
+    <div>
+        @foreach (var item in Model)
+        {
+            <span><b> @item.TenTaiKhoan </b> : @item.NoiDung</span>
+            <hr style="width:100%;height:20px;" align="center" color="red" />
+        }
+        @Html.PagedListPager(Model, page => Url.Action("Details/" + Model.ElementAt(0).MaSanPham, new { page }))
+    </div>
+</div>

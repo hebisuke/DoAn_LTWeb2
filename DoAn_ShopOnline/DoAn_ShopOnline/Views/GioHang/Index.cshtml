@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ShopOnlineConnection.GioHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div id="page-content" class="single-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            // từ bên shop.details . Gửi ma san pham , ten san pham va gia san pham
+            // tu db lay len so luong . soluong * gia ra tien . Cong tat ca tien ra tong tien
+            <div class="row">
+                <div class="product well">
+                    <div class="col-md-3">
+                        <div class="image">
+                            @Html.Partial("_AvartaDetails", DoAn_ShopOnline.Models.BUS.ShopOnlineBUS.LoadAvartaImg(item.MaSanPham.ToString()))
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="caption">
+                            @using (Html.BeginForm("CapNhat", "GioHang", FormMethod.Post))
+                            {
+                                <input type="hidden" name="masanpham" value="@item.MaSanPham" />
+                                <input type="hidden" name="tensanpham" value="@item.TenSanPham" />
+                                <input type="hidden" name="gia" value="@item.Gia" />
+                                       @Html.Partial("_GioHang", DoAn_ShopOnline.Models.BUS.ShopOnlineBUS.ChiTiet(item.MaSanPham.ToString()))
+                                <label>Số lượng : </label> <input class="form-inline quantity" min="1" max="1000" type="number" value="@item.SoLuong" name="soluong"><input type="submit" class="btn btn-2 " value="Update" /> <br />
+                                <span>Tổng Tiền : @item.TongTien</span>
+                                <hr>
+                            }
+                            <a href="@Url.Action("Xoa","GioHang",new { masanpham= item.MaSanPham})" class="btn btn-default pull-right">REMOVE</a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            
+        }
+      
+      
+
+        @*Quay về trang sản phẩm*@
+        <div class="row">
+            <div class="col-md-4 col-md-offset-8 ">
+                <center><a href="@Url.Action("index","Shop")" class="btn btn-1">Continue To Shopping</a></center>
+            </div>
+        </div>
+
+        @*Tính tiền*@ 
+        <div class="row">
+            <div class="pricedetails">
+                <div class="col-md-4 col-md-offset-8">
+                    <table>
+                        <h6>Tính tiền : </h6>
+                        <tr>
+                            <td>Tổng</td>
+                            <td>@ViewBag.TongTien</td>
+                        </tr>
+                       
+                        <tr>
+                            <td>Giảm giá : </td>
+                            <td>0</td>
+                        </tr>
+                        <tr style="border-top: 1px solid #333">
+                            <td><h5>THÀNH TIỀN</h5></td>
+                            <td>@ViewBag.TongTien</td>
+                        </tr>
+                    </table>
+                    <center><a href="@Url.Action("index","ThanhToan")" class="btn btn-1">Checkout</a></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>	
+

@@ -1,0 +1,98 @@
+﻿@model ShopOnlineConnection.SanPham
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_MainLayoutAdmin.cshtml";
+}
+<style>
+    input[type=text] {
+        width: 100%;
+        height: 40px;
+        background: black;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ff0000;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=number] {
+        width: 100%;
+        height: 40px;
+        background: black;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ff0000;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #2a9fd6;
+        color: black;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+</style>
+<script src="~/Areas/AssetAdmin/js/product/previewFile.js"></script>
+@using (Html.BeginForm("Edit", "SanPhamAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table style="width:80% ;margin:auto; background:black;">
+        <tr>
+            <td>Mã Sản Phẩm</td>
+            <td> <input style="width: 300px;float:left; " maxlength="11" type="text" name="MaSanPham" required readonly value="@Model.MaSanPham"/></td>
+            @*<td rowspan="9">
+                <div>
+                    <img id="target" class="img" src="~/Asset/img/@Model.HinhChinh" alt="your image" style="float:right; width: 320px; height: 300px;" required />
+                </div>
+            </td>*@
+        </tr>
+        <tr>
+            <td>Mã Loại Sản Phẩm</td>
+            <td>
+                @Html.DropDownList("MaLoaiSanPham", null,new { @style = "float:left; width: 300px; background:black;height:30px;" })
+            </td>
+        </tr>
+        <tr>
+            <td>Tên Sản Phẩm</td>
+            <td> <input style="width: 300px;float:left;" type="text" name="TenSanPham" maxlength="11" required value="@Model.TenSanPham"/></td>
+        </tr>
+        <tr>
+            <td>Giá</td>
+            <td> <input style="width: 300px; float:left;" type="number" name="Gia" required value="@Model.Gia"/></td>
+        </tr>
+        <tr>
+            <td>Ghi Chú</td>
+            <td> <input style="width: 300px;float:left;" type="text" name="GhiChu" value="@Model.GhiChu" required /></td>
+        </tr>
+        <tr>
+            <td>Nhà Sản Xuất</td>
+            <td>
+                @Html.DropDownList("MaNhaSanXuat", null, new { @style = "float:left; width: 300px; background:black;height:30px;" })
+
+            </td>
+        </tr>
+        <tr>
+
+            <td style="width: 300px;">Cấu Hình</td>
+            <td colspan="2"><textarea class="ckeditor" name="CauHinh" style="width: 300px; height: 150px; max-width: 100px; max-height: 600px; background:white;" rows="4" cols="30">@Model.CauHinh</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input style="height: 40px; width: 300px;   margin-left:32%;
+	 background:#016ABC;color: #fff;border: 1px solid #eee;border-radius: 20px;box-shadow: 5px 5px 5px #eee;"
+                       type="submit" name="btn_ThemDienThoai" value="Xác nhận chỉnh sửa" />
+            </td>
+        </tr>
+    </table>
+}
+
