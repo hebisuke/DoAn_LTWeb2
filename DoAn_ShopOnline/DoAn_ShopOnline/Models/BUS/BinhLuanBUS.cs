@@ -10,6 +10,8 @@ namespace DoAn_ShopOnline.Models.BUS
     {
         public static void ThemBT(BinhLuan bl)
         {
+            // phần Hiền làm //
+
             // truy vấn thiếu hoặc sai gì đó
             var db = new ShopOnlineConnectionDB();
             //string a = "insert into BinhLuan(MaSanPham,MaTaiKhoan,NoiDung) values('" + MaSanPham + "','" + MaTaiKhoan + "','" + NoiDung + "')";
