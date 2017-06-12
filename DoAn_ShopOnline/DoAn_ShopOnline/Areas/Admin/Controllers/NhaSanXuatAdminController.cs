@@ -1,4 +1,5 @@
-﻿using DoAn_ShopOnline.Models.BUS;
+﻿//Phần thành làm
+using DoAn_ShopOnline.Models.BUS;
 using PagedList;
 using ShopOnlineConnection;
 using System;
@@ -112,3 +113,5 @@ namespace DoAn_ShopOnline.Areas.Admin.Controllers
         }
     }
 }
+
+// hết phần thành làm
